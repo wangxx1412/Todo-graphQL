@@ -6,11 +6,6 @@ const UserType = require("./user_type");
 const ItemType = require("./item_type");
 const AuthService = require("../services/auth");
 
-//0. Auth(wait...)
-//1. Add item to todo list //
-//2. Move item to done list //
-//3. Restore item to todo list//
-//3. Delete item from done list //
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {

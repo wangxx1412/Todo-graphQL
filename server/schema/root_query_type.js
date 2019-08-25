@@ -10,9 +10,8 @@ const RootQuery = new GraphQLObjectType({
   fields: () => ({
     user: {
       type: UserType,
-      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
-      resolve(parentValue, { id }, req) {
-        return User.findById(id);
+      resolve(parentValue, args, req) {
+        return req.user;
       }
     },
     todos: {

@@ -1,10 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import "./style/style.css";
+import React from "react";
+import ReactDOM from "react-dom";
+import ApolloClient from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { HttpLink } from "apollo-link-http";
+import { onError } from "apollo-link-error";
+import { ApolloProvider } from "react-apollo";
+import { BrowserRouter } from "react-router-dom";
+import loadable from "@loadable/component";
+
+const App = loadable(() => import("./components/App"));
+
+const cache = new InMemoryCache();
+const link = new HttpLink({
+  uri: "http://localhost:5000/graphql"
+});
+
+const client = new ApolloClient({
+  dataIdFromObject: o => o.id,
+  cache,
+  link
+});
 
 const Root = () => {
-    return(
-        <div>Todo App by GraphQL</div>
-    )
+  return (
+    <BrowserRouter>
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    </BrowserRouter>
+  );
 };
 
-ReactDOM.render(<Root />, document.querySelector('#root'));
+ReactDOM.render(<Root />, document.querySelector("#root"));

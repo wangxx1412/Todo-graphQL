@@ -2,40 +2,40 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const User = require("./user");
 
-const ItemSchema = new Schema({
+const TodoSchema = new Schema({
+  content: String,
   user: {
     type: Schema.Types.ObjectId,
     ref: "user"
   },
-  content: String,
   done: { type: Boolean, default: false },
   created: { type: Date, default: Date.now }
 });
 
-ItemSchema.statics.done = function(id) {
-  return this.findById(id).then(item => {
-    item.done = true;
-    return item.save();
+TodoSchema.statics.done = function(id) {
+  return this.findById(id).then(todo => {
+    todo.done = true;
+    return todo.save();
   });
 };
 
-ItemSchema.statics.unDone = function(id) {
-  return this.findById(id).then(item => {
-    item.done = false;
-    return item.save();
+TodoSchema.statics.unDone = function(id) {
+  return this.findById(id).then(todo => {
+    todo.done = false;
+    return todo.save();
   });
 };
 
-ItemSchema.statics.deleteItemFromUser = function(itemId) {
+TodoSchema.statics.deleteItemFromUser = function(todoId) {
   //Need to add checking auth user equal to item's author then delete
-  return this.findById(itemId).then(async item => {
-    await User.findById(item.user._id).then(async user => {
-      await user.todos.pull(item);
+  return this.findById(todoId).then(async todo => {
+    await User.findById(todo.user._id).then(async user => {
+      await user.todos.pull(todo);
       await user.save();
     });
-    await Item.deleteOne({ _id: itemId });
+    await Todo.deleteOne({ _id: todoId });
   });
 };
 
-const Item = mongoose.model("item", ItemSchema);
-module.exports = Item;
+const Todo = mongoose.model("todo", TodoSchema);
+module.exports = Todo;

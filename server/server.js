@@ -49,7 +49,7 @@ process.on("SIGTERM", () => {
 });
 
 app.use(cors());
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(
   session({
     resave: true,

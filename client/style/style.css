@@ -1,14 +1,70 @@
-.collection-item{
-    display: flex;
-    justify-content: space-between;
+.list {
+  border-color: #b0bec5 !important;
+}
+.collection-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.todo {
+  border-color: #546e7a !important;
+  box-shadow: none !important;
+  padding: 15px 25px !important;
 }
 
 .material-icons {
-    cursor: pointer;
-    margin-right: 5px;
+  cursor: pointer;
+  margin-right: 5px;
 }
 
 .vote-box {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.subtitle-content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.app-info {
+  display: flex;
+  align-items: center;
+}
+
+.login-form {
+  margin-top: 50px;
+}
+
+.auth-from {
+  margin-top: 50px;
+}
+
+.submit-btn {
+  margin-top: 10px;
+}
+.create-btn {
+  margin-top: 20px;
+}
+.todolist {
+  margin-top: 10px;
+}
+
+.todo-create {
+  margin: 50px;
+}
+
+.create-form .submit-btn {
+  margin-top: 10px;
+}
+
+.loader {
+  margin-top: 100px;
 }

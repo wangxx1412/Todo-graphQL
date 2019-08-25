@@ -1,18 +1,23 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const Schema = mongoose.Schema;
-const Item = require("./item");
+const Todo = require("./item");
 
-const UserSchema = new Schema({
-  email: String,
-  password: String,
-  todos: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "item"
-    }
-  ]
-});
+const UserSchema = new Schema(
+  {
+    email: String,
+    password: String,
+    todos: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "todo"
+      }
+    ]
+  },
+  {
+    usePushEach: true
+  }
+);
 
 UserSchema.pre("save", function save(next) {
   const user = this;
@@ -43,10 +48,11 @@ UserSchema.methods.comparePassword = function comparePassword(
 };
 
 UserSchema.statics.addTodo = function(userId, content) {
+  const Todo = mongoose.model("todo"); //Closure!: Without this line, "Error: Todo is not a constructor"
   return this.findById(userId).then(async user => {
-    const item = await new Item({ content, user });
-    await user.todos.push(item);
-    return Promise.all([item.save(), user.save()]).then(([item, user]) => user);
+    const todo = await new Todo({ content, user });
+    await user.todos.push(todo);
+    return Promise.all([todo.save(), user.save()]).then(([todo, user]) => user);
   });
 };
 
