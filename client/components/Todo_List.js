@@ -37,7 +37,7 @@ class TodoList extends Component {
       return (
         <li key={id} className="collection-item todo">
           <div>{content}</div>
-          <div>
+          <div className="icons">
             <i
               className="material-icons waves-effect waves-light"
               onClick={() => this.doneTodo(id)}
@@ -64,7 +64,7 @@ class TodoList extends Component {
       return (
         <li key={id} className="collection-item todo">
           <div>{content}</div>
-          <div>
+          <div className="icons">
             <i
               className="material-icons waves-effect waves-light"
               onClick={() => this.unDoneTodo(id)}

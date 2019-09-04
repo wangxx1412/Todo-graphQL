@@ -16,7 +16,16 @@ if (process.env.NODE_ENV === "production") {
 }
 mongoose.Promise = global.Promise;
 
-mongoose.connect(dbURI, { useNewUrlParser: true });
+const options = {
+  useNewUrlParser: true,
+  autoIndex: false,
+  reconnectTries: 100,
+  reconnectInterval: 500,
+  poolSize: 10,
+  bufferMaxEntries: 0
+};
+
+mongoose.connect(dbURI, options);
 
 //Monitor mongoose connection
 mongoose.connection.on("connected", () => {

@@ -35,7 +35,7 @@ class TodoCreate extends Component {
             Back
           </button>
         </Link>
-        <h3 className="blue-grey-text text-darken-1">Create a new Todo item</h3>
+        <h3 className="blue-grey-text text-darken-1">Create a new Todo</h3>
         <form className="create-form" onSubmit={this.onSubmit.bind(this)}>
           <label>Todo:</label>
           <input
