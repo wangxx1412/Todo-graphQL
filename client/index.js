@@ -12,8 +12,9 @@ import loadable from "@loadable/component";
 const App = loadable(() => import("./components/App"));
 
 const cache = new InMemoryCache();
+
 const link = new HttpLink({
-  uri: "http://localhost:5000/graphql"
+  uri: "/graphql"
 });
 
 const client = new ApolloClient({
